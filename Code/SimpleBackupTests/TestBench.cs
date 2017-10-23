@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using CygSoft.SimpleBackup;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,12 +38,17 @@ namespace CygSoft.SimpleBackupTests
 
         Any target folders that do not map to corresponding directories in the currently 
 
-        http://www.blackwasp.co.uk/folderrecursion.aspx https://msdn.microsoft.com/en-us/library/dd413232.aspx
-
+        Folder Recursion
+        -----------------
+        http://www.blackwasp.co.uk/folderrecursion.aspx 
+        https://msdn.microsoft.com/en-us/library/dd413232.aspx
         https://www.codeproject.com/Articles/38959/A-Faster-Directory-Enumerator
+        https://ufpr.dl.sourceforge.net/project/fastfileinfo
 
+
+        File Path too Long
+        -----------------
         https://stackoverflow.com/questions/8745215/best-way-to-resolve-file-path-too-long-exception
-
         https://stackoverflow.com/questions/12747132/pathtoolongexception-c-sharp-4-5
 
 
@@ -59,10 +65,28 @@ namespace CygSoft.SimpleBackupTests
     [TestFixture]
     class TestBench
     {
+        //List<string> folders = PathEnumerators.ShowAllFoldersUnder(@"C:\Users\robb\Desktop");
+
+        //folders.Reverse();
+        //StringBuilder builder = new StringBuilder();
+        //foreach (string folder in folders)
+        //    builder.AppendLine(folder);
+
+
+        //Assert.IsTrue(true);
+
         [Test]
-        public void TestIt()
+        public void Backup_Initialized_HasPopulated_SourceAndTarget_Properties()
         {
-            Assert.IsTrue(true);
+
+
+            string sourceDirectory = @"C:\Desktop\DirectoryTests\Source";
+            string targetDirectory = @"C:\Desktop\DirectoryTests\Target";
+
+            Backup backup = new Backup(sourceDirectory, targetDirectory);
+
+            Assert.AreEqual(sourceDirectory, backup.SourceDirectory);
+            Assert.AreEqual(targetDirectory, backup.TargetDirectory);
         }
     }
 }
